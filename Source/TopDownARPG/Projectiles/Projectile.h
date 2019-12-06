@@ -10,32 +10,32 @@ UCLASS(Abstract, Blueprintable)
 class AProjectile : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AProjectile();
+
+	UPROPERTY(VisibleAnywhere, Category = Movement)
+		class UProjectileMovementComponent* MovementComponent;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	void OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+		void OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UPROPERTY(VisibleAnywhere, Category = Gameplay)
-	class USphereComponent* SphereComponent;
+		class USphereComponent* SphereComponent;
 
 	UPROPERTY(VisibleAnywhere, Category = Visual)
-	class UParticleSystemComponent* OnOverlapParticle;
-
-	UPROPERTY(VisibleAnywhere, Category = Movement)
-	class UProjectileMovementComponent* MovementComponent;
+		class UParticleSystemComponent* OnOverlapParticle;
 
 	UPROPERTY(EditAnywhere)
-	float Damage;
+		float Damage;
 
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

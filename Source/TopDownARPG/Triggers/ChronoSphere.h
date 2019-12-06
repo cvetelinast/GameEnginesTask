@@ -20,7 +20,7 @@ class TOPDOWNARPG_API AChronoSphere : public AActor
 private:
 	FTimerManager* TimerManager = nullptr;
 	FTimerHandle TimerHandle;
-	AActor* LastTrappedActor;
+	FTimerDelegate CustomDelegate;
 
 public:
 	// Sets default values for this actor's properties
@@ -43,13 +43,20 @@ protected:
 		void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UFUNCTION()
+		void ChangeSpeedOfActorOnCollision(AActor* Other, float speedCoeff);
+
+	UFUNCTION()
+		void ActivateParticle();
+
+	UFUNCTION()
 		void StartTimer(AActor* OtherActor);
 
 	UFUNCTION()
-		void SpeedUpActor();
+		void StopTimer();
+
+	UFUNCTION()
+		void SpeedUpActor(AActor* OtherActor);
 
 public:
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };
